@@ -5,7 +5,7 @@ from django.db import models
 class AbstractTransportation(models.Model):
     origin = models.CharField(max_length=30)
     destination = models.CharField(max_length=30)
-    price = models.BigIntegerField
+    price = models.BigIntegerField()
     company = models.CharField(max_length=30)
     departure_time = models.DateTimeField(auto_now_add=False)
     arrival_time = models.DateTimeField(auto_now_add=False)

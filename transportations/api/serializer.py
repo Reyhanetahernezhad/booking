@@ -3,7 +3,7 @@ from transportations.models import *
 
 
 class AirplaneSerializer(serializers.ModelSerializer):
-    class meta:
+    class Meta:
         model = Airplane
-        fields = ('origin', 'destination', 'price', 'company', 'departure_time', 'arrival_time',
+        fields = ('origin', 'destination', 'company', 'departure_time', 'arrival_time',
                   'flight_class', 'passenger', )

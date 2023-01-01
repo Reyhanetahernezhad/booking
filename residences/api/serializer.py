@@ -1,8 +1,9 @@
 from rest_framework import serializers
 from residences.models import *
 
-class HotelSerializer(serializers.ModelSerializer):
+
+class RoomSerializer(serializers.ModelSerializer):
     class meta:
-        model = Hotel
-        fields = ('origin', 'destination', 'price', 'company', 'departure_time', 'arrival_time',
-                  'flight_class', 'passenger', )
+        model = Room
+        fields = ('type', 'location', 'name', 'rate', 'avatar', 'price',
+                  'room_num', 'passenger_num', 'is_booked', 'checkin', 'checkout', 'facility' )

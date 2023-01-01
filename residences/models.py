@@ -39,7 +39,6 @@ class Room(AbstractResidence):
 
     room_num = models.SmallIntegerField()
     passenger_num = models.SmallIntegerField()
-    avatar = models.ImageField(upload_to='room/images/', null=True, blank=True)
     is_booked = models.BooleanField(default=False)
     checkin = models.BooleanField(default=False)
     checkout = models.BooleanField(default=False)
