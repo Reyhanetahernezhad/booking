@@ -1,8 +1,14 @@
 from django.db import models
 from django.core.validators import MinValueValidator, MaxValueValidator
 
+residence_type_choices = (
+    ('1', 'hotel'),
+    ('2', 'vila'),
+)
+
 
 class AbstractResidence(models.Model):
+    type = models.CharField(max_length=20, choices=residence_type_choices)
     name = models.CharField(max_length=20)
     location = models.CharField(max_length=20)
     rate = models.PositiveSmallIntegerField(validators=[MinValueValidator(1), MaxValueValidator(10)])
