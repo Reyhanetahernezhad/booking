@@ -42,5 +42,6 @@ class Room(AbstractResidence):
     is_booked = models.BooleanField(default=False)
     checkin = models.BooleanField(default=False)
     checkout = models.BooleanField(default=False)
+    duration = models.DurationField()
     facility = models.CharField(choices=facility_choices, max_length=30)
     rate = models.CharField(choices=star_choices, max_length=30)

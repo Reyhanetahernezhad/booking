@@ -3,12 +3,20 @@ from django.db import models
 
 
 class AbstractTransportation(models.Model):
+
+    flighttype_choices = (
+        ('international', 'international'),
+        ('local', 'local')
+    )
+
+    flight_type = models.CharField(choices=flighttype_choices, max_length=30)
     origin = models.CharField(max_length=30)
     destination = models.CharField(max_length=30)
     price = models.BigIntegerField()
     company = models.CharField(max_length=30)
     departure_time = models.DateTimeField(auto_now_add=False)
     arrival_time = models.DateTimeField(auto_now_add=False)
+    capacity = models.IntegerField()
 
     class Meta:
         abstract = True
