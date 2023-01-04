@@ -37,3 +37,4 @@ class User(AbstractBaseUser, PermissionsMixin):
         RegexValidator(r'^989[0-3,9]\d{8}$', 'Enter a valid phone number.', 'invalid')], null=True, blank=True)
     USERNAME_FIELD = 'email'
     objects = UserManager()
+
