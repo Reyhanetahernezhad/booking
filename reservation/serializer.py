@@ -31,21 +31,15 @@ class HotelRoomReservationSerializer(serializers.ModelSerializer):
         checkout = self.get_value('checkout')
 
         status_1 = HotelRoomReservation.objects.filter(Room_id=self.get_value('Room'),
-                                                       checkin__lte=checkin, checkout__gte=checkout).exists()
-
-        status_2 = HotelRoomReservation.objects.filter(Room_id=self.get_value('Room'),
-                                                       checkin__gte=checkin, checkout__gte=checkout).exists()
-
-        status_3 = HotelRoomReservation.objects.filter(Room_id=self.get_value('Room'),
-                                                       checkin__gte=checkin, checkout__lte=checkout).exists()
-
-        status_4 = HotelRoomReservation.objects.filter(Room_id=self.get_value('Room'),
                                                        checkin__lte=checkin, checkout__lte=checkout).exists()
 
-        if status_1 or status_2 or status_3 or status_4:
-            raise ObjectDoesNotExist('no more available room')
-        else:
+        status_2 = HotelRoomReservation.objects.filter(Room_id=self.get_value('Room'),
+                                                       checkin__gte=checkout, checkout__gte=checkout).exists()
+
+        if status_1 or status_2:
+            HotelRoom.save()
             super(HotelRoomReservationSerializer, self).create(validated_data)
 
-
+        else:
+            raise ObjectDoesNotExist('no more available room')
 
