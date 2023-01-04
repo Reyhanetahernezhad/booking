@@ -42,7 +42,7 @@ INSTALLED_APPS = [
     'transportations',
     'users',
     'rest_framework',
-    'book',
+    'reservation',
 
 
 ]

@@ -1,10 +1,10 @@
 from django.shortcuts import render
 from rest_framework import generics
-from residences.api.serializer import RoomSerializer
-from residences.models import Room
+from residences.api.serializer import HotelRoomSerializer
+from residences.models import HotelRoom
 
 
-class RoomList(generics.ListAPIView):
-    queryset = Room.objects.all()
-    serializer_class = RoomSerializer
+class HotelRoomList(generics.ListAPIView):
+    queryset = HotelRoom.objects.all()
+    serializer_class = HotelRoomSerializer
 

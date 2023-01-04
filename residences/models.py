@@ -19,7 +19,7 @@ class AbstractResidence(models.Model):
         abstract = True
 
 
-class Room(AbstractResidence):
+class HotelRoom(AbstractResidence):
 
     facility_choices = (
        ('1', 'parking'),

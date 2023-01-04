@@ -11,7 +11,7 @@ class Migration(migrations.Migration):
 
     dependencies = [
         ('residences', '0001_initial'),
-        ('book', '0001_initial'),
+        ('reservation', '0001_initial'),
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
     ]
 

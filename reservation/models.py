@@ -1,6 +1,6 @@
 from django.db import models
 from transportations.models import Airplane
-from residences.models import Room
+from residences.models import HotelRoom
 from django.db import models
 from django.conf import settings
 User = settings.AUTH_USER_MODEL
@@ -42,6 +42,6 @@ class AbstractResidenceReservation(models.Model):
     total_price = models.IntegerField()
 
 
-class RoomReservation(AbstractResidenceReservation):
-    Room = models.ForeignKey(Room, on_delete=models.CASCADE)
+class HotelRoomReservation(AbstractResidenceReservation):
+    Room = models.ForeignKey(HotelRoom, on_delete=models.CASCADE)
     is_valid = models.BooleanField(default=True)

@@ -1,9 +1,9 @@
 from django.contrib import admin
-from residences.models import Room
+from residences.models import HotelRoom
 
 
-class AdminRoom(admin.ModelAdmin):
+class AdminHotelRoom(admin.ModelAdmin):
     list_display = ('id', 'name', 'location', 'price')
 
 
-admin.site.register(Room, AdminRoom)
+admin.site.register(HotelRoom, AdminHotelRoom)
