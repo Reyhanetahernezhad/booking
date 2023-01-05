@@ -15,7 +15,7 @@ class AbstractTransportationsReservation(models.Model):
     reservation_choices = models.CharField(choices=Reservation_choices, max_length=20)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     reservation_time = models.DateTimeField()
-    total_price = models.IntegerField()
+    total_price = models.IntegerField(null=True, blank=True)
     created_time = models.DateTimeField(auto_now_add=True)
     modified_time = models.DateTimeField(auto_now=True)
 
@@ -39,6 +39,8 @@ class AbstractResidenceReservation(models.Model):
     reservation_time = models.DateTimeField()
     created_time = models.DateTimeField(auto_now_add=True)
     modified_time = models.DateTimeField(auto_now=True)
+    checkin = models.DateTimeField(auto_now_add=False)
+    checkout = models.DateTimeField(auto_now_add=False)
     total_price = models.IntegerField()
 
 

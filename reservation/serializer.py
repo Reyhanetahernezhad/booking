@@ -8,15 +8,17 @@ from transportations.models import *
 class AirplaneReservationSerializer(serializers.ModelSerializer):
     class Meta:
         model = AirplaneReservation
-        fields = ('id', 'reservation_choices', 'user', 'reservation_time', 'airplane', 'is_valid')
+        fields = ('id', 'reservation_time', 'airplane', 'is_valid', 'total_price')
 
     def create(self, validated_data):
-        airplane = Airplane.objects.get(id=self.get_value('flight'))
+        user = self.context['request'].user
+        validated_data['user'] = user
+        airplane = Airplane.objects.get(id=validated_data['airplane'].id)
 
-        if Airplane.passenger < Airplane.capacity:
-            Airplane.capacity = Airplane.capacity-1
-            Airplane.save()
-            super(AirplaneReservationSerializer, self).create(validated_data)
+        if airplane.passenger < airplane.capacity:
+            airplane.capacity = airplane.capacity-1
+            airplane.save()
+            return super(AirplaneReservationSerializer, self).create(validated_data)
         else:
             raise ObjectDoesNotExist('No more available sit')
 
@@ -24,22 +26,27 @@ class AirplaneReservationSerializer(serializers.ModelSerializer):
 class HotelRoomReservationSerializer(serializers.ModelSerializer):
     class Meta:
         model = HotelRoomReservation
-        fields = ('id', 'name', 'Room', 'passenger_num', 'is_booked', 'checkin', 'checkout', 'facility')
+        fields = [
+            'reservation_time', 'checkin', 'checkout', 'Room', 'is_valid', 'total_price'
+        ]
 
     def create(self, validated_data):
-        checkin = self.get_value('checkin')
-        checkout = self.get_value('checkout')
+        user = self.context['request'].user
+        validated_data['user'] = user
 
-        status_1 = HotelRoomReservation.objects.filter(Room_id=self.get_value('Room'),
+        checkin = validated_data['checkin']
+        checkout = validated_data['checkout']
+
+        status_1 = HotelRoomReservation.objects.filter(id=validated_data['Room'].id,
                                                        checkin__lte=checkin, checkout__lte=checkout).exists()
 
-        status_2 = HotelRoomReservation.objects.filter(Room_id=self.get_value('Room'),
+        status_2 = HotelRoomReservation.objects.filter(id=validated_data['Room'].id,
                                                        checkin__gte=checkout, checkout__gte=checkout).exists()
 
         if status_1 or status_2:
-            HotelRoom.save()
-            super(HotelRoomReservationSerializer, self).create(validated_data)
+            raise ObjectDoesNotExist('no more available room')
 
         else:
-            raise ObjectDoesNotExist('no more available room')
+            return super(HotelRoomReservationSerializer, self).create(validated_data)
+
 
