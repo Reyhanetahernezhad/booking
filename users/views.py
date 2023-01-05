@@ -24,12 +24,12 @@ class UserViewSet(
     queryset = User.objects.all()
     serializer_class = UserSerializer
 
-    def get_permissions(self):
-        if self.action == 'create':
-            return [AllowAny()]
+    # def get_permissions(self):
+    #     if self.action == 'create':
+    #         return [AllowAny()]
 
-        elif self.action == 'list':
-            return [IsAdminUser()]
+        # elif self.action == 'list':
+        #     return [IsAdminUser()]
 
 
 def send_sms_to_user(phone_number):
