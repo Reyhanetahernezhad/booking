@@ -16,6 +16,8 @@ class AbstractTransportation(models.Model):
     company = models.CharField(max_length=30)
     departure_time = models.DateTimeField(auto_now_add=False)
     arrival_time = models.DateTimeField(auto_now_add=False)
+    departure_date = models.DateTimeField(auto_now_add=False)
+    arrival_date = models.DateTimeField(auto_now_add=False)
     capacity = models.IntegerField()
 
     class Meta:
